@@ -1,22 +1,21 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import movies from "../../movies";
 import { useEffect, useState } from "react";
 
 export function Home() {
-  const [movies, setMovies] = useState([]);
+  const [series, setSeries] = useState([]);
   console.log("Oi");
 
   useEffect(() => {
-    async function fetchMovies() {
+    async function fetchSeries() {
       const response = await axios.get(
-        "https://api.themoviedb.org/3/discover/movie?api_key=1dbc566a4812e099606bf66f83159d6e"
+        "https://api.themoviedb.org/3/tv/popular?api_key=9b0bf59083345bf6f6a1b1a347761971"
       );
-
-      setMovies(response.data.results);
+      console.log(response);
+      setSeries(response.data.results);
     }
 
-    fetchMovies();
+    fetchSeries();
   }, []);
 
   // useEffect(() => {
@@ -33,13 +32,15 @@ export function Home() {
     <>
       <h1>Home</h1>
 
-      {movies.map((currentMovie) => {
+      {series.map((currentSerie) => {
         return (
-          <Link to={`/movie/${currentMovie.id}`}>
-            <h2>{currentMovie.original_title}</h2>
+          <Link to={`/tv/${currentSerie.id}`}>
+            <h2>{currentSerie.name}</h2>
           </Link>
         );
       })}
     </>
   );
 }
+
+///tv/${}/season/${}

@@ -4,35 +4,35 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export function MoviePage() {
+export function SeriePage() {
   const params = useParams();
-  const [movie, setMovie] = useState({});
+  const [serie, setSerie] = useState({});
 
   // const movie = movies.filter((currentMovie) => {
   //   return currentMovie.id === Number(params.movieId);
   // })[0];
 
   useEffect(() => {
-    async function fetchMovie() {
+    async function fetchSerie() {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=1dbc566a4812e099606bf66f83159d6e`
+        `https://api.themoviedb.org/3/tv/${params.tv_id}?api_key=9b0bf59083345bf6f6a1b1a347761971`
       );
 
       console.log(response);
 
-      setMovie(response.data);
+      setSerie(response.data);
     }
 
-    fetchMovie();
+    fetchSerie();
   }, []);
 
   return (
     <>
-      <h1>{movie.original_title}</h1>
-      <p>{movie.overview}</p>
+      <h1>{serie.name}</h1>
+      <p>{serie.overview}</p>
       <img
-        src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-        alt="Poster do filme"
+        src={`https://image.tmdb.org/t/p/w500${serie.backdrop_path}`}
+        alt="Poster da série"
       />
     </>
   );
